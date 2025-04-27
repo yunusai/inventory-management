@@ -1,57 +1,50 @@
 version: '3.8'
 
 services:
+  # This is my Laravel app service
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: laravel_app
+    # I’m building this from the Dockerfile in the same directory
+    build: .
+    # I named the container so I can find it easily
+    container_name: my_laravel_app
+    # I need to map port 8000 so I can access the app on my browser
+    ports:
+      - "8000:8000"
+    # I need to mount my project folder so I can edit files and see changes
     volumes:
       - .:/var/www
+    # My app needs the database to be up first
     depends_on:
       - db
+    # I’m setting environment variables for Laravel to connect to MySQL
     environment:
       - APP_ENV=local
-      - APP_KEY=base64:N4X8i5FC3ulSpuLE5V0Tmc/f7BQdC+kGg3AmKNBdSJY= # Generate using `php artisan key:generate --show`
+      # I generated this key using php artisan key:generate --show
+      - APP_KEY=base64:vVb/4JVp0cuy4+oqEucfUQbGVDFqPQkr1cHcoHRB3Ks=
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
       - DB_DATABASE=inventory_management
       - DB_USERNAME=root
       - DB_PASSWORD=
-    networks:
-      - app-network
 
+  # This is my MySQL database service
   db:
+    # Using the official MySQL image
     image: mysql:8.0
-    container_name: mysql_db
+    # Named the container for easy reference
+    container_name: my_mysql_db
+    # Setting up the database name, user, and password
     environment:
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_DATABASE=inventory_management
-    volumes:
-      - db_data:/var/lib/mysql
+    # I want to map port 3306 so I can connect to MySQL from my computer if needed
     ports:
       - "3306:3306"
-    networks:
-      - app-network
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    ports:
-      - "8000:80"
+    # I’m not sure if I need a volume, but I’ll add one to save the database data
     volumes:
-      - .:/var/www
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - app
-    networks:
-      - app-network
+      - db_data:/var/lib/mysql
 
+# This is for storing the MySQL data so it doesn’t get lost
 volumes:
   db_data:
-
-
-networks:
-  app-network:
-    driver: bridge
