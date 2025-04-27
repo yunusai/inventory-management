@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=local
+      - APP_KEY=base64:N4X8i5FC3ulSpuLE5V0Tmc/f7BQdC+kGg3AmKNBdSJY= # Generate using `php artisan key:generate --show`
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=inventory_management
+      - DB_USERNAME=root
+      - DB_PASSWORD=
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=inventory_management
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+
+networks:
+  app-network:
+    driver: bridge
