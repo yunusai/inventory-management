@@ -26,7 +26,7 @@ services:
       - DB_PORT=3306
       - DB_DATABASE=inventory_management
       - DB_USERNAME=root
-      - DB_PASSWORD=
+      - DB_PASSWORD=root
 
   # This is my MySQL database service
   db:
@@ -36,7 +36,7 @@ services:
     container_name: my_mysql_db
     # Setting up the database name, user, and password
     environment:
-      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=inventory_management
     # I want to map port 3306 so I can connect to MySQL from my computer if needed
     ports:
