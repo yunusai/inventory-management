@@ -1,7 +1,5 @@
 # Laravel 12 Inventory Management API
 
-Proyek ini merupakan API sederhana untuk mengelola data Admin, Item, Category, dan Supplier menggunakan Laravel 12.
-
 ## Langkah Pembuatan Aplikasi
 
 1. Inisialisasi projek Laravel 12 menggunakan Laragon.
@@ -35,19 +33,13 @@ Proyek ini merupakan API sederhana untuk mengelola data Admin, Item, Category, d
 29. Melakukan `docker-compose up -d`.
 30. Menguji dengan Postman.
 
----
-
 ## Tools & Teknologi
 
 - Laravel 12
-- Sanctum Authentication
 - MySQL
-- Docker & Docker Compose
-- Postman (untuk pengujian API)
+- Docker Desktop
+- Postman
 - Visual Studio Code
-- Laragon (development environment)
-
-## Author
-
-_Dibuat dengan ❤️ menggunakan Laravel_
+- Laragon
+- xampp
 
