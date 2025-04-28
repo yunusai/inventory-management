@@ -43,7 +43,7 @@
 - Laragon
 - xampp
 
-## Catatan
+## Catatan untuk pengujian pada Docker
 
 - gunakan docker exec -it my_laravel_app php artisan migrate
 - lalu docker exec -it my_laravel_app php artisan db:seed jika ingin melakukan seeding terlebih dahulu
