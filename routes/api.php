@@ -7,9 +7,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StockController;
 
-Route::post('/items', [ItemController::class, 'store']);
-Route::get('/items', [ItemController::class, 'index']);
-Route::get('/items/low-stock', [ItemController::class, 'lowStock']);
+Route::post('/items', [ItemController::class, 'store']);// Create a new item
+Route::get('/items', [ItemController::class, 'index']);// List all items
+Route::get('/items/low-stock', [ItemController::class, 'lowStock']);// List items with low stock
 
 Route::post('/categories', [CategoryController::class, 'store']);
 Route::get('/categories', [CategoryController::class, 'index']);
