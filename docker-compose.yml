@@ -16,7 +16,7 @@ services:
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_DATABASE=inventory_management
+      - DB_DATABASE=inventory-management
       - DB_USERNAME=root
       - DB_PASSWORD=root
   db:
@@ -24,7 +24,7 @@ services:
     container_name: my_mysql_db
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=inventory_management
+      - MYSQL_DATABASE=inventory-management
     ports:
       - "3306:3306"
     volumes:
